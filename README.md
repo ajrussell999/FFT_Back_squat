@@ -35,12 +35,12 @@ The change in gradient direction, negative to positive, and positive to negative
 
 **Table 1.** Back squat truth table for angular velocity of sacrum, thigh and shank   
 
-|segment|Stage1 Dir/Grad|Stage2 Dir/Grad|Stage3 Dir/Grad|Stage4 Dir/Grad|Stage5 Dir/Grad|Stage6 Dir/Grad|   
+|Segment|Stage1 Dir/Grad|Stage2 Dir/Grad|Stage3 Dir/Grad|Stage4 Dir/Grad|Stage5 Dir/Grad|Stage6 Dir/Grad|   
 |------|------|------|------|------|------|------|
 |Sacrum |	- / - |	- / + |	+ / - |	- / - |	- / + |	+ / - |   
 |Thigh  | - / - |	- / + |	- / + |	+ / + |	+ / +	| + / - |    
 |Shank	| + / +	| + / - |	- / +	| + / +	| + / + |	+ / - |    
-|time   |18.75%	|18.75%	|20.00%	|10.00%	|12.50%	|20.00%|    
+|Time   |18.75%	|18.75%	|20.00%	|10.00%	|12.50%	|20.00%|    
 
 
 
