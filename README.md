@@ -62,25 +62,97 @@ ALthought the kinematic data for the study has no accelerometer data, the gyrosc
 
 To analyse the back squat absolute position data with the Fourier transform, angular acceleration is calculated using the first central difference method (FCDM). The Fast Fourier Transform (FFT) is based on the Discrete Fourier Transform (DFT), with FFT being preferred since it requires less computation. The results of both transforms are identical, however FFT is more efficient, which is why it is implemented in signal processor hardware and software (Lyons 1997).   
 The Fourier transform is a mathematical method to convert a function in the amplitude versus time domain to the amplitude versus frequency domain for non-periodic functions. It does for non-periodic functions what the Fourier series does for periodic functions (van Biezen, 2016.) 
-A Matlab script to perform Fast Fourier Transform (FFT) on the angular acceleration of the thigh is described in the following code.
+A Matlab script to perform Fast Fourier Transform (FFT) on the angular acceleration of the thigh is described in the following code. Note that the percent symbol denotes comments which are not executed as part of the script.   
+
 #### 4.1 dlmread   
 
 ```sh
 THACC=dlmread('MT_00130431_011-001_2ndsquat_TH_CDM_AngularAcceleratation.txt');
-% Assign delimited read text file, name of THACC. 
-% Calculate starting point of 2nd squat
-% SAcrum THigh and SHank motion data start at sample 19264. 
+                % Assign delimited read text file, name of THACC. 
+                % Calculate starting point of 2nd squat
+                % SAcrum THigh and SHank motion data start at sample 19264. 
 x=THACC(:,1);   % All values column 1, sample #
 x=(x-19263);    % 2nd Squat_011-001.txt sample counter starts at 19264 
 y=THACC(:,8);   % Column 8. Thigh angular acceleration in degrees/s/s
 ```
-The dlmread in the first part of the FFT script reads values of thigh angular acceleration, THACC from column 8 in a delimted text file. The : wildcard demotes all values of the column are read and plot in the verticle axis. The time values in colum 1 are plot in the horizontal axis, their value has 19263 subtracted, the time sample when th eback squat starts.   
+The dlmread in the first part of the FFT script reads values of thigh angular acceleration, THACC from column 8 in a delimted text file. The : wildcard demotes all values of the column are read and plot in the verticle axis and form the signal denoted by variable 'y'. The time values in colum 1 are plot in the horizontal axis, their value has 19263 subtracted, the time sample when the back squat starts.   
 
-#### 4.2 Fs -Sampling Frequency
+#### 4.2 Fs -Sampling Frequency   
 ```sh
 Fs = 100;       % Sampling frequency 100Hz   
 ```
 The sampling frequency is the number of discrete signal amplitude values taken per second. In this case one hundred samples of angular acceleration per second.   
+
+#### 4.3 L -Length of signal   
+```sh
+L=437;          % Length of signal 437 samples over 4.37 seconds, 
+                % duration of the second squat.
+```
+The length of signal is the number signal samples that are analysed by the FFT transform. In this case there are 437 samples, which at 10 Hz sampling rate give a signal length of 4.34 seconds.
+
+#### 4.4 fft -fast fourier transform   
+```sh
+Yaxis = fft(y); % Compute the Fast Fourier Transform (FFT) of the signal, 
+                % angular acceleration of the thigh during back squat.
+
+```   
+In Matlab the fast fourier transform (FFT) is configured by the fft syntax, and performed on the signal variable in parenthis, in this example (y). The results of the FFT transform are assigned to the variable 'Yaxis'.   
+
+#### 4.5 abs -absolute value or magnitude of complex signal   
+```sh
+P2 = abs(Yaxis/L);  % The negative amplitudes of the signal 
+                    % are made always positive, hence the absolute value or magnitude.
+                    % Plot P1 the single sided spectrum based on P2, and the even
+                    % valued length L.
+```   
+The P2 variable values are calculated as the absolute values of real and imaginary components of the signal, before the single side plot P1 is calculated. This demands that L must be made an even value to center the single sided plot.   
+
+#### 4.6 P2 -double sided spectrum   
+```sh
+P1 = P2(1:L/2+1);   % P2 being the double sided amplitude spectrum, take one more element than half. 
+                    % For odd numbers the result is half, (rounded down) plus 1.
+                    % This ensures the DC component is retained.
+```   
+The P1 valaues are the calculated from absolute values of P2. Since P1 has no complex component, it is single sided and requires the center of P2 to be found. The formula achieves this centering function irrespective of L being even or odd.   
+
+### 4.7  P1 -single sided spectrum power   
+```sh   
+
+P1(2:end-1) = 2*P1(2:end-1); % Two sided spectrum has energy split between negative and positive 
+                             % frequencies on the frequency axis (X-axis).
+                             % To convert frequency axis to single sided spectrum, discard the 
+                             % negative half, and multiple every point on the remaining positive 
+                             % side by two, to retain signal power. 
+``` 
+The single sided spectrum P1 is derived from P2 which had postive and negative frequencies. The positive side P1 must multiply all almplitudes by two to retian the original signal power.
+
+#### 4.8 f -frequency domain   
+```sh
+f = Fs*(0:(L/2))/L; % Define frequency domain f, 
+                    % based on Nyquist rate, (50Hz).
+                    % Equals half of the sampling frequency
+```
+The frequence domain defines the range of spectra over which the transform is plot. The frequency domain is determined by the Nyquist rate, in this case 50Hz, which is half of the 100 Hz sampling rate.   
+
+#### 4.9 plot -plot of the FFT frquency domain   
+```sh
+plot(f,P1, 'r')     % P1 single sided spectrum in frequency domain.
+                    % Plot magnitude P1 against frequency f.
+title('Single-Sided Amplitude Spectrum of X(t):-thigh ang-accel 437 samples')
+xlabel('f (Hz)')
+ylabel('|P1(f)|')
+```
+The plot function plots variables in the x and y axis, and determines line color. The signal amplitude P1 is plot against frequency domain on the x axis. The third parameter is line specification, 'r' denotes that the line colour is red.   
+
+![BS_FFT][FFT_SPECTRA]   
+**Figure 7.** FFT spectra 0 to 50 Hz   
+
+![BS02288][BS_Frequency]
+**Figure 8.** Back Squat fundamental frequency   
+
+From the FFT analysis the fundamental frequency of 0.2288Hz gives a time period for the back squat exercise of 4.37 seconds. 
+
+
 
 
 
@@ -94,4 +166,5 @@ The sampling frequency is the number of discrete signal amplitude values taken p
 [6BACKSQUATS]:https://github.com/ajrussell999/FFT_Back_squat/blob/master/images/6backsquats_ang_vel.png 
 [ANG_ACCEL]:https://github.com/ajrussell999/FFT_Back_squat/blob/master/images/backsquat_ang_accel.jpg 
 [SIG_PROC_FLOW]:https://github.com/ajrussell999/FFT_Back_squat/blob/master/images/workflow_signal_proc.png
-
+[FFT_SPECTRA]:https://github.com/ajrussell999/FFT_Back_squat/blob/master/images/backsquat_fft_frequencies.png
+[BS_Frequency]: 
