@@ -33,11 +33,15 @@ The change in gradient direction, negative to positive, and positive to negative
 
 >Gradients of angular velocity have the potential to be clearly differentiated by a decision tree algorithm in recognizing kinematic data as back squats exercise and to use slope gradient and duration to qualify the range of motion for sacrum, thigh and shank. Angular velocity gradient slope and duration reduces the burden of the motion capture system to provide highly accurate absolute angle data within the earth frame orientation. If the IMMU is not accurately aligned with the thigh, for example due to the securing elastic strap slipping, then there will be an error in the absolute angle of the body segment. Assuming that the IMMU remains secure for the remaining back squats, this is not critical since while moving out of alignment, the IMMU captures changes in angular velocity. By time duration and angular velocity, the angle through which the thigh traversed is calculated.   
 
-**Table 1.** Back squat truth table   
+**Table 1.** Back squat truth table for angular velocity of sacrum, thigh and shank   
 
 |segment|Stage1 Dir/Grad|Stage2 Dir/Grad|Stage3 Dir/Grad|Stage4 Dir/Grad|Stage5 Dir/Grad|Stage6 Dir/Grad|   
-|-------|---------------|---------------|---------------|---------------|---------------|---------------|      
-|Sacrum |	-  / - |	- / + | 	+ / - |	- / - |	- / + |	+ / - |   
+|------|------|------|------|------|------|------|
+|Sacrum |	- / - |	- / + |	+ / - |	- / - |	- / + |	+ / - |   
+|Thigh  | - / - |	- / + |	- / + |	+ / + |	+ / +	| + / - |    
+|Shank	| + / +	| + / - |	- / +	| + / +	| + / + |	+ / - |    
+|time   |18.75%	|18.75%	|20.00%	|10.00%	|12.50%	|20.00%|    
+
 
 
 
