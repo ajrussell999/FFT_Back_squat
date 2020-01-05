@@ -15,7 +15,7 @@ The wearable system consists of three inertial magnetic measurement units (IMMU)
 ![IMMUS][CLOUD]
 **Figure 1.** Wearables - back squat motion capture & appraisal system   
 
-From the absolute position of the three body segments, angular velocity and angular acceleration are calculate, their use being necessary for kinematic analysis. A plot of absolute angles of sacrum, thigh and shank are cwhere all three segments commence from zero degrees, proved useful to illustrate the range of angles traversed by each body segment during a single back squat repetition. The photo sequence above also helps to describe the changes of angle throughout the exercise sequence.   
+From the absolute position of the three body segments, angular velocity and angular acceleration are calculate, their use being necessary for kinematic analysis. A plot of absolute angles of sacrum, thigh and shank are cwhere all three segments commence from zero degrees, proved useful to illustrate the range of angles traversed by each body segment during a single back squat repetition. The photo sequence above the plot also helps to describe the changes of pitch for sacrum, thigh and shank throughout the exercise sequence.   
 
 ![squatsequence][PHOTOSEQU]  
 **Figure 2.** Back squat time sequence  
