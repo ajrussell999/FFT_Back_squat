@@ -24,11 +24,16 @@ From the absolute position of the three body segments, angular velocity and angu
 
 ### 3. Kinematic data analysis
 --------------------------
+The segment plot of relative change of absolute angle (Figure. 3) could be utilised by a decision tree algorithm, however, the number of gradient changes is less than in the plot of angular velocity (Figure 4). When the IMMU data is further processed to create angular velocity of body segments, the number of gradients and gradient direction (sign +/-) changes increases. With the thigh segment there are two distinct gradients in the negative cycle and two gradients in the positive cycle. The gradient in the thigh descent cycle changes direction from negative to positive, and in the ascend cycle the gradient changes from positive to negative
+The change in gradient direction, negative to positive, and positive to negative at distinct stages of the back squat exercise give the thigh angular velocity data a strong “signature”. Changes in the gradients of angular velocity correspond to key “stages” of segment kinematics throughout the back squat cycle. Gradients of angular velocity could be analysed by a decision tree algorithm to recognise the kinematic data as back squat exercise and to use slope gradient and duration to qualify the back squat range of motion.
+![ANG_VEL][6STAGE_ANG_VEL]   
+**Figure 4.** The six discrete stages of back squats in angular velocity for sacrum (blue), thigh (red) and shank (green) in degrees per second.
 
 
 
 [CLOUD]:https://github.com/ajrussell999/FFT_Back_squat/blob/master/images/Wearables_cloud.png   
 [PHOTOSEQU]:https://github.com/ajrussell999/FFT_Back_squat/blob/master/images/photosequence.png
 [ABS_ANGLE]:https://github.com/ajrussell999/FFT_Back_squat/blob/master/images/absolute_angle.png
+[6STAGE_ANG_VEL]:https://github.com/ajrussell999/FFT_Back_squat/blob/master/images/good_squat_6stages.png
 
 
