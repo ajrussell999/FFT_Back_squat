@@ -10,9 +10,11 @@ Kinematic data captured with gyroscope sensors in the sagittal plane is analysed
 -----------------------------
 
 The wearable system consists of three inertial magnetic measurement units (IMMU) sensors worn on the shank, thigh and sacrum. The motion capture data in the sagittal plane, from the three body segments is written to three separate space delimited files. The IMMUs record absolute angle of the three boby segments at a sampling frequency of 100 Herz. From the absolute position of the three body segments, angular velocity and angular acceleration are calculate, their use being necessary for kinematic analysis.   
+![IMMUS][CLOUD]
+**Figure 1.** Wearables - back squat motion capture & appraisal system   
 
 
 
 
-
+[CLOUD]:https://github.com/ajrussell999/FFT_Back_squat/blob/master/images/Wearables_cloud.png   
 
