@@ -150,12 +150,7 @@ The plot function plots variables in the x and y axis, and determines line color
 ![BS02288][BS_Frequency]
 **Figure 8.** Back Squat fundamental frequency   
 
-From the FFT analysis the fundamental frequency of 0.2288Hz gives a time period for the back squat exercise of 4.37 seconds. 
-
-
-
-
-
+From the FFT analysis the fundamental frequency of 0.2288Hz gives a time period for the back squat exercise of 4.37 seconds. In this case data from a single repetition is used, however, multiple repitions could be analysed and an average time for the repetitions is returned.
 
 
 
@@ -167,4 +162,5 @@ From the FFT analysis the fundamental frequency of 0.2288Hz gives a time period 
 [ANG_ACCEL]:https://github.com/ajrussell999/FFT_Back_squat/blob/master/images/backsquat_ang_accel.jpg 
 [SIG_PROC_FLOW]:https://github.com/ajrussell999/FFT_Back_squat/blob/master/images/workflow_signal_proc.png
 [FFT_SPECTRA]:https://github.com/ajrussell999/FFT_Back_squat/blob/master/images/backsquat_fft_frequencies.png
-[BS_Frequency]: 
+[BS_Frequency]:https://github.com/ajrussell999/FFT_Back_squat/blob/master/images/FFT_0_2288Hz.png 
+
