@@ -36,15 +36,51 @@ The change in gradient direction, negative to positive, and positive to negative
 **Table 1.** Back squat truth table for angular velocity of sacrum, thigh and shank   
 
 |Segment|Stage1 Dir/Grad|Stage2 Dir/Grad|Stage3 Dir/Grad|Stage4 Dir/Grad|Stage5 Dir/Grad|Stage6 Dir/Grad|   
-|------|------|------|------|------|------|------|
+|:------|:------:|:------:|:------:|:------:|:------:|:------:|
 |Sacrum |	- / - |	- / + |	+ / - |	- / - |	- / + |	+ / - |   
 |Thigh  | - / - |	- / + |	- / + |	+ / + |	+ / +	| + / - |    
 |Shank	| + / +	| + / - |	- / +	| + / +	| + / + |	+ / - |    
 |Time   |18.75%	|18.75%	|20.00%	|10.00%	|12.50%	|20.00%|    
 
+Now that a methodolgy for appraising back squats has been devised, the next problem to address is how to find the start of the back squat cycle. In human gait anaylsis the start of a step is easily observed with a spike in negative acceleration as the heal strikes the floor. In the figure of angular velocity ofsix back squat repetitions it is visible that the plot crosses zero on the vericial access several times between cycles, making finding the start problematic.  
+![6BS][6BACKSQUATS]   
+**Figure 5.** Thigh angular velocity - sequence of six back squats   
+
+The wearable sensors loaned for this motion capture study failed to record acceleration, thus the analysis is forced to use gyroscope data only, and analysis of absolute angle and its derivatives. Further analysis utilised the second derivative, angular acceleration with FFT to find the time duration of a single back squat cycle. The time of a single back squat is required for segmenting data and exercise recognition with a sliding widow classifier algorithm.   
+
+![ANG_ACC][ANG_ACCEL]   
+**Figure 6.** Back squat thigh angular acceleration in degrees per second squared   
 
 
+ALthought the kinematic data for the study has no accelerometer data, the gyroscope data is cyclical in nature and is suitable for analysis by Fast Fourier Transform (FFT). With the FFT analysis the tim eperiod of the back squat is revealed, allowing hte classifier to segment data, when performing gradient pattern match techniques. The signal processing workflow is described in the flow diagram shown in Figure 7.
 
+![SIG_PROC][SIG_PROC_FLOW]   
+**Figure 7.** Gyroscope sensor data signal processing workflow   
+
+
+### 4. Fast Fourier Transform   
+
+To analyse the back squat absolute position data with the Fourier transform, angular acceleration is calculated using the first central difference method (FCDM). The Fast Fourier Transform (FFT) is based on the Discrete Fourier Transform (DFT), with FFT being preferred since it requires less computation. The results of both transforms are identical, however FFT is more efficient, which is why it is implemented in signal processor hardware and software (Lyons 1997).   
+The Fourier transform is a mathematical method to convert a function in the amplitude versus time domain to the amplitude versus frequency domain for non-periodic functions. It does for non-periodic functions what the Fourier series does for periodic functions (van Biezen, 2016.) 
+A Matlab script to perform Fast Fourier Transform (FFT) on the angular acceleration of the thigh is described in the following code.
+#### 4.1 dlmread   
+
+```sh
+THACC=dlmread('MT_00130431_011-001_2ndsquat_TH_CDM_AngularAcceleratation.txt');
+% Assign delimited read text file, name of THACC. 
+% Calculate starting point of 2nd squat
+% SAcrum THigh and SHank motion data start at sample 19264. 
+x=THACC(:,1);   % All values column 1, sample #
+x=(x-19263);    % 2nd Squat_011-001.txt sample counter starts at 19264 
+y=THACC(:,8);   % Column 8. Thigh angular acceleration in degrees/s/s
+```
+The dlmread in the first part of the FFT script reads values of thigh angular acceleration, THACC from column 8 in a delimted text file. The : wildcard demotes all values of the column are read and plot in the verticle axis. The time values in colum 1 are plot in the horizontal axis, their value has 19263 subtracted, the time sample when th eback squat starts.   
+
+#### 4.2 Fs -Sampling Frequency
+```sh
+Fs = 100;       % Sampling frequency 100Hz   
+```
+The sampling frequency is the number of discrete signal amplitude values taken per second. In this case one hundred samples of angular acceleration per second.   
 
 
 
@@ -55,5 +91,7 @@ The change in gradient direction, negative to positive, and positive to negative
 [PHOTOSEQU]:https://github.com/ajrussell999/FFT_Back_squat/blob/master/images/photosequence.png
 [ABS_ANGLE]:https://github.com/ajrussell999/FFT_Back_squat/blob/master/images/absolute_angle.png
 [6STAGE_ANG_VEL]:https://github.com/ajrussell999/FFT_Back_squat/blob/master/images/good_squat_6stages.png
-
+[6BACKSQUATS]:https://github.com/ajrussell999/FFT_Back_squat/blob/master/images/6backsquats_ang_vel.png 
+[ANG_ACCEL]:https://github.com/ajrussell999/FFT_Back_squat/blob/master/images/backsquat_ang_accel.jpg 
+[SIG_PROC_FLOW]:https://github.com/ajrussell999/FFT_Back_squat/blob/master/images/workflow_signal_proc.png
 
