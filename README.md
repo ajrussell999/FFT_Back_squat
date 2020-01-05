@@ -37,10 +37,10 @@ The change in gradient direction, negative to positive, and positive to negative
 
 |segment|Stage1 Dir/Grad|Stage2 Dir/Grad|Stage3 Dir/Grad|Stage4 Dir/Grad|Stage5 Dir/Grad|Stage6 Dir/Grad|   
 |-------|---------------|---------------|---------------|---------------|---------------|---------------|      
+|Sacrum |	-  / - |	- / + | 	+ / - |	- / - |	- / + |	+ / - |   
 
 
-|col1|col2|col3|
-|----|----|----|
+
 
 
 
