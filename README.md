@@ -52,13 +52,15 @@ The wearable sensors loaned for this motion capture study failed to record accel
 **Figure 6.** Back squat thigh angular acceleration in degrees per second squared   
 
 
-ALthought the kinematic data for the study has no accelerometer data, the gyroscope data is cyclical in nature and is suitable for analysis by Fast Fourier Transform (FFT). With the FFT analysis the tim eperiod of the back squat is revealed, allowing hte classifier to segment data, when performing gradient pattern match techniques. The signal processing workflow is described in the flow diagram shown in Figure 7.
+Althought the kinematic data for the study has no accelerometer data, the gyroscope data is cyclical in nature and is suitable for analysis by Fast Fourier Transform (FFT). With the FFT analysis the tim eperiod of the back squat is revealed, allowing hte classifier to segment data, when performing gradient pattern match techniques. The signal processing workflow is described in the flow diagram shown in Figure 7.
 
 ![SIG_PROC][SIG_PROC_FLOW]   
 **Figure 7.** Gyroscope sensor data signal processing workflow   
 
 
 ### 4. Fast Fourier Transform   
+---   
+
 
 To analyse the back squat absolute position data with the Fourier transform, angular acceleration is calculated using the first central difference method (FCDM). The Fast Fourier Transform (FFT) is based on the Discrete Fourier Transform (DFT), with FFT being preferred since it requires less computation. The results of both transforms are identical, however FFT is more efficient, which is why it is implemented in signal processor hardware and software (Lyons 1997).   
 The Fourier transform is a mathematical method to convert a function in the amplitude versus time domain to the amplitude versus frequency domain for non-periodic functions. It does for non-periodic functions what the Fourier series does for periodic functions (van Biezen, 2016.) 
@@ -152,6 +154,13 @@ The plot function plots variables in the x and y axis, and determines line color
 
 From the FFT analysis the fundamental frequency of 0.2288Hz gives a time period for the back squat exercise of 4.37 seconds. In this case data from a single repetition is used, however, multiple repitions could be analysed and an average time for the repetitions is returned.
 
+### References   
+---
+
+Lyons, R. (1997). Understanding digital signal processing 1 rd.
+
+van Biezen, M. 2016. Electrical Engineering Ch 19: Fourier Transform (1 of 45) What is a Fourier Transform?   
+   Retrieved November 3, 2019, from  https://www.youtube.com/watch?v=7hSMtRdHutY&list=PLX2gX-ftPVXVTT3qpUeHVxbmJx9D1vGhC&index=1   
 
 
 [CLOUD]:https://github.com/ajrussell999/FFT_Back_squat/blob/master/images/Wearables_cloud.png   
