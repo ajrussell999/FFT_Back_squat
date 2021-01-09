@@ -12,22 +12,21 @@ Kinematic data captured with gyroscope sensors in the sagittal plane is analysed
 
 The wearable system consists of three inertial magnetic measurement units (IMMU) sensors worn on the shank, thigh and sacrum. The motion capture data in the sagittal plane, from the three body segments is written to three separate space delimited files. The IMMUs record absolute angle of the three boby segments at a sampling frequency of 100 Herz.   
 
-![IMMUS][CLOUD]
-**Figure 1.** Wearables - back squat motion capture & appraisal system   
+
 
 From the absolute position of the three body segments, angular velocity and angular acceleration are calculate, their use being necessary for kinematic analysis. A plot of absolute angles of sacrum, thigh and shank are cwhere all three segments commence from zero degrees, proved useful to illustrate the range of angles traversed by each body segment during a single back squat repetition. The photo sequence above the plot also helps to describe the changes of pitch for sacrum, thigh and shank throughout the exercise sequence.   
 
 ![squatsequence][PHOTOSEQU]  
-**Figure 2.** Back squat time sequence  
+**Figure 1.** Back squat time sequence  
 ![3SEG_ANGLES][ABS_ANGLE]  
-**Figure 3.** Sagittal plane back squat exercise IMMU motion capture, relative change in absolute angle (degrees) of body segments against time in 1/100 second samples. Sacrum blue, thigh red, shank green.   
+**Figure 2.** Sagittal plane back squat exercise IMMU motion capture, relative change in absolute angle (degrees) of body segments against time in 1/100 second samples. Sacrum blue, thigh red, shank green.   
 
 ### 3. Kinematic data analysis
 --------------------------
-The segment plot of relative change of absolute angle (Figure. 3) could be utilised by a decision tree algorithm, however, the number of gradient changes is less than in the plot of angular velocity (Figure 4). When the IMMU data is further processed to create angular velocity of body segments, the number of gradients and gradient direction (sign +/-) changes increases. With the thigh segment there are two distinct gradients in the negative cycle and two gradients in the positive cycle. The gradient in the thigh descent cycle changes direction from negative to positive, and in the ascend cycle the gradient changes from positive to negative
+The segment plot of relative change of absolute angle (Figure. 2) could be utilised by a decision tree algorithm, however, the number of gradient changes is less than in the plot of angular velocity (Figure 3). When the IMMU data is further processed to create angular velocity of body segments, the number of gradients and gradient direction (sign +/-) changes increases. With the thigh segment there are two distinct gradients in the negative cycle and two gradients in the positive cycle. The gradient in the thigh descent cycle changes direction from negative to positive, and in the ascend cycle the gradient changes from positive to negative
 The change in gradient direction, negative to positive, and positive to negative at distinct stages of the back squat exercise give the thigh angular velocity data a strong “signature”. Changes in the gradients of angular velocity correspond to key “stages” of segment kinematics throughout the back squat cycle. Gradients of angular velocity could be analysed by a decision tree algorithm to recognise the kinematic data as back squat exercise and to use slope gradient and duration to qualify the back squat range of motion.
 ![ANG_VEL][6STAGE_ANG_VEL]   
-**Figure 4.** The six discrete stages of back squats in angular velocity for sacrum (blue), thigh (red) and shank (green) in degrees per second.   
+**Figure 3.** The six discrete stages of back squats in angular velocity for sacrum (blue), thigh (red) and shank (green) in degrees per second.   
 
 >From the sequence of gradients pronounced in the plots of angular velocity, a six stage truth table is constructed. This forms the main body of the classifier and appraisal system. Not only is the classifier able to recognise the back squat exercise and count the number of repetitions, but also by calculating the magnitude and duration of the gradients in each of the six stages, give a qualitative appraisal of the performance. An appraisal method considers the gradients and duration from each body segment in each of the six stages to calculate range of motion. With the application of discrete weights based on the technical importance of each gradient in the six-stage cycle, the appraisal is able reflect the technical merit of the back squat. The calculation of a metric for the sign, degree and duration of the gradient of the sacrum in stage 4, could be multiplied several-fold, to ensure that this quality is clearly present in highly appraised back squats.
 
@@ -44,18 +43,18 @@ The change in gradient direction, negative to positive, and positive to negative
 
 Now that a methodolgy for appraising back squats has been devised, the next problem to address is how to find the start of the back squat cycle. In human gait anaylsis the start of a step is easily observed with a spike in negative acceleration as the heal strikes the floor. In the figure of angular velocity ofsix back squat repetitions it is visible that the plot crosses zero on the vericial access several times between cycles, making finding the start problematic.  
 ![6BS][6BACKSQUATS]   
-**Figure 5.** Thigh angular velocity - sequence of six back squats   
+**Figure 4.** Thigh angular velocity - sequence of six back squats   
 
 The wearable sensors loaned for this motion capture study failed to record acceleration, thus the analysis is forced to use gyroscope data only, and analysis of absolute angle and its derivatives. Further analysis utilised the second derivative, angular acceleration with FFT to find the time duration of a single back squat cycle. The time of a single back squat is required for segmenting data and exercise recognition with a sliding widow classifier algorithm.   
 
 ![ANG_ACC][ANG_ACCEL]   
-**Figure 6.** Back squat thigh angular acceleration in degrees per second squared   
+**Figure 5.** Back squat thigh angular acceleration in degrees per second squared   
 
 
-Althought the kinematic data for the study has no accelerometer data, the gyroscope data is cyclical in nature and is suitable for analysis by Fast Fourier Transform (FFT). With the FFT analysis the tim eperiod of the back squat is revealed, allowing hte classifier to segment data, when performing gradient pattern match techniques. The signal processing workflow is described in the flow diagram shown in Figure 7.
+Althought the kinematic data for the study has no accelerometer data, the gyroscope data is cyclical in nature and is suitable for analysis by Fast Fourier Transform (FFT). With the FFT analysis the tim eperiod of the back squat is revealed, allowing hte classifier to segment data, when performing gradient pattern match techniques. The signal processing workflow is described in the flow diagram shown in Figure 6.
 
 ![SIG_PROC][SIG_PROC_FLOW]   
-**Figure 7.** Gyroscope sensor data signal processing workflow   
+**Figure 6.** Gyroscope sensor data signal processing workflow   
 
 
 ### 4. Fast Fourier Transform   
